@@ -18,16 +18,17 @@ class _SettingsPageState extends State<SettingsPage> {
     var heightSize = MediaQuery.of(context).size.height;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text(
           'Settings',
         ),
       ),
-      body: ListView(
-        padding: const EdgeInsets.symmetric(horizontal: 8),
-        children: <Widget>[
-          Container(
-            height: (auxHeight? (heightSize -90):100),
+//      body: ListView(
+//        padding: const EdgeInsets.symmetric(horizontal: 8),
+//        children: <Widget>[
+         body: Container(
+            height: (auxHeight? (heightSize):100),
             color: Colors.grey,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -74,9 +75,9 @@ class _SettingsPageState extends State<SettingsPage> {
               ],
             ),
           ),
-        ],
-      ),
-    );
+        //],
+     );
+//    );
   }
   Widget titleView(){
     return Container(
