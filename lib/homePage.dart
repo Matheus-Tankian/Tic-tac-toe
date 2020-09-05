@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'settingsPage.dart';
@@ -21,28 +20,48 @@ class _HomePageState extends State<HomePage> {
   String data;
   String datao;
 
-  var lista = List();
+ List<int> lista = new List(9);
+
+ List<String>lt2 = new List(9);
 
   bool click = false;
 
-  void chamalista(){
-    if(click==true){
+//  void apo(value){
+//    for(int i=0;i<9;i++){
+//      print(lts[i]);
+//      if(lts[1]==0){
+//        setState(() {
+//          lts[1]=value;
+//        });
+//      }
+//    }
+//
+//  }
 
-    }else{
-      click = !click;
+  void inicia(funcval, verival){
+    if(click==false){
+      for(int i=0;i<9;i++){
+        setState(() {
+          lista[i] = 0;
+
+        });
+      }
+      setState(() {
+        click = !click;
+      });
+
+      funcVerifica(funcval,verival);
+
+
+    }else if(click==true){
+      print("clicl true");
+      funcVerifica(funcval,verival);
+
     }
   }
 
-  void inciaLista(){
-    for(int i=0; i<9; i++){
-      lista.insert(i, 0);
-    }
 
-    for(int i=0; i<9; i++){
-      print(lista[i]);
-    }
 
-  }
 
   void primeiro(){
     setState(() {
@@ -50,27 +69,32 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  void verificarJogada(){
+  void verificarJogada(value){
     if(jogadas%2 == 0){
       print('par');
+      setState(() {
+        lt2[value] = 'X';
+      });
     }else if(jogadas%2 == 1){
       print('Inpar');
+      setState(() {
+        lt2[value] = 'O';
+      });
     }
   }
 
-  void funcVerifica(value){
+  void funcVerifica(value, verival){
     if(value == 1){
       print(value);
       if(lista[0] == 1){
         print('e sim' );
-        print(lista);
       }else{
+        print('e nao' );
         setState(() {
-          print('e nao' );
-          lista.insert(0, value);
-          primeiro();
-
+         lista[0] = value;
         });
+        verificarJogada(verival);
+      primeiro();
       }
 
     }else if(value == 2){
@@ -79,26 +103,26 @@ class _HomePageState extends State<HomePage> {
         print('e sim' );
         print(lista);
       }else{
+        print('e nao' );
         setState(() {
-          print('e nao' );
-          lista.insert(1, value);
-          primeiro();
-
+          lista[1]=value;
         });
+        verificarJogada(verival);
+        primeiro();
       }
 
     }else if(value == 3){
 
       print(value);
       if(lista[2] == value){
-        print('e sim' );
-        print(lista);
+
       }else {
         setState(() {
-          print('e nao');
-          lista.insert(2, value);
-          primeiro();
+
+          lista[2]= value;
         });
+        verificarJogada(verival);
+        primeiro();
       }
 
     }else if(value == 4){
@@ -109,10 +133,12 @@ class _HomePageState extends State<HomePage> {
         print(lista);
       }else {
         setState(() {
-          print('e nao');
-          lista.insert(3, value);
-          primeiro();
+
+          lista[3]=value;
+
         });
+        verificarJogada(verival);
+        primeiro();
       }
 
     }else if(value == 5){
@@ -123,10 +149,12 @@ class _HomePageState extends State<HomePage> {
         print(lista);
       }else {
         setState(() {
-          print('e nao');
-          lista.insert(4, value);
-          primeiro();
+
+          lista[4]=value;
+
         });
+        verificarJogada(verival);
+        primeiro();
       }
 
     }else if(value == 6){
@@ -137,10 +165,12 @@ class _HomePageState extends State<HomePage> {
         print(lista);
       }else {
         setState(() {
-          print('e nao');
-          lista.insert(5, value);
-          primeiro();
+
+          lista[5]=value;
+
         });
+        verificarJogada(verival);
+        primeiro();
       }
 
     }else if(value == 7){
@@ -151,10 +181,12 @@ class _HomePageState extends State<HomePage> {
         print(lista);
       }else {
         setState(() {
-          print('e nao');
-          lista.insert(6, value);
-          primeiro();
+
+          lista[6]=value;
+
         });
+        verificarJogada(verival);
+        primeiro();
       }
 
     }else if(value == 8){
@@ -165,10 +197,12 @@ class _HomePageState extends State<HomePage> {
         print(lista);
       }else {
         setState(() {
-          print('e nao');
-          lista.insert(7, value);
-          primeiro();
+
+          lista[7]=value;
+
         });
+        verificarJogada(verival);
+        primeiro();
       }
 
     }else if(value == 9){
@@ -179,10 +213,12 @@ class _HomePageState extends State<HomePage> {
         print(lista);
       }else {
         setState(() {
-          print('e nao');
-          lista.insert(8, value);
-          primeiro();
+
+          lista[8]=value;
+
         });
+        verificarJogada(verival);
+        primeiro();
       }
     }
   }
@@ -223,14 +259,14 @@ class _HomePageState extends State<HomePage> {
       body: Container(
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
         height: (auxheight? (heightSize): 300),
-        color: Colors.red,
-
+        color: Colors.indigo,
         child: MainView(),
       ),
     );
   }
   Widget MainView(){
     return Column(
+
       children: <Widget>[
         Expanded(
           child: Row(
@@ -239,12 +275,34 @@ class _HomePageState extends State<HomePage> {
                 child: ConstrainedBox(
                   constraints: BoxConstraints.expand(),
                   child: Container(
-                    color: Colors.yellow,
-                    child: Text(
-                      'X 4',
-                      style: TextStyle(
-                        fontSize: 20,
-                      ),
+                    child: Column(
+                      children: <Widget>[
+                        Expanded(
+                          child:Center(
+                            child: Text(
+                              'Play1',
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                          flex: 2,
+                        ),
+
+                        Expanded(
+                          child:Center(
+                            child: Text(
+                              'X',
+                              style: TextStyle(
+                                fontSize: 50,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                          flex: 3,
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -254,12 +312,34 @@ class _HomePageState extends State<HomePage> {
                 child: ConstrainedBox(
                   constraints: BoxConstraints.expand(),
                   child: Container(
-                    color: Colors.orangeAccent,
-                    child: Text(
-                      'O 4',
-                      style: TextStyle(
-                        fontSize: 20,
-                      ),
+                    child: Column(
+                      children: <Widget>[
+                        Expanded(
+                          child:Center(
+                            child: Text(
+                              'Play2 ',
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                          flex: 2,
+                        ),
+
+                        Expanded(
+                          child:Center(
+                            child: Text(
+                              'O',
+                              style: TextStyle(
+                                fontSize: 50,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                          flex: 3,
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -312,25 +392,17 @@ class _HomePageState extends State<HomePage> {
         Expanded(
           child: Container(
             margin: const EdgeInsets.only(left: 8.0,right: 4.0),
-            color: Colors.green,
+            color: Colors.blueAccent,
             child: ConstrainedBox(
               constraints: BoxConstraints.expand(),
               child: FlatButton(
                 onPressed: () {
 
+                  inicia(1, 0);
 
-                  //funClick(2);
-                  //listaValores(2);
-
-                  //inciaLista();
-                  //inicia a inicalista uma vz e tudo funcona
-
-                  funcVerifica(1);
-                  verificarJogada();
                   print(jogadas);
 
                   print(lista[0]);
-
 
                 },
                 textColor: Colors.white,
@@ -339,7 +411,7 @@ class _HomePageState extends State<HomePage> {
                 disabledTextColor: Colors.white,
                 highlightColor: Colors.orangeAccent,
                 child: Text(
-                  (click? '$datao': ''),
+                  (lt2[0]==null? '' :'${lt2[0]}'),
                 ),
               ),
             ),
@@ -350,18 +422,14 @@ class _HomePageState extends State<HomePage> {
         Expanded(
           child: Container(
             margin: const EdgeInsets.only(left: 4.0, right: 4.0),
-            color: Colors.white,
+            color: Colors.blueAccent,
             child: ConstrainedBox(
               constraints: BoxConstraints.expand(),
               child: FlatButton(
                 onPressed: () {
 
-
-                  //funClick(2);
-                  //listaValores(2);
-                  funcVerifica(2);
-                  verificarJogada();
-                  print(jogadas);
+                  inicia(2, 1);
+                 print(jogadas);
 
                   print(lista[1]);
 
@@ -372,8 +440,9 @@ class _HomePageState extends State<HomePage> {
                 disabledTextColor: Colors.white,
                 highlightColor: Colors.orangeAccent,
                 child: Text(
-                    (click? '$data': ''),
+                  (lt2[1]==null? '' :'${lt2[1]}'),
                 ),
+
               ),
             ),
           ),
@@ -383,20 +452,17 @@ class _HomePageState extends State<HomePage> {
         Expanded(
           child: Container(
             margin: const EdgeInsets.only(left: 4.0,right: 8.0),
-            color: Colors.greenAccent,
+            color: Colors.blueAccent,
             child: ConstrainedBox(
               constraints: BoxConstraints.expand(),
               child: FlatButton(
                 onPressed: () {
 
-
-                  //funClick(2);
-                  //listaValores(2);
-                  funcVerifica(3);
-                  verificarJogada();
+                  inicia(3, 2);
                   print(jogadas);
 
                   print(lista[2]);
+
 
                 },
                 textColor: Colors.white,
@@ -405,7 +471,7 @@ class _HomePageState extends State<HomePage> {
                 disabledTextColor: Colors.white,
                 highlightColor: Colors.orangeAccent,
                 child: Text(
-                  (click? '$data': ''),
+                  (lt2[2]==null? '' :'${lt2[2]}'),
                 ),
               ),
             ),
@@ -426,17 +492,14 @@ class _HomePageState extends State<HomePage> {
         Expanded(
           child: Container(
             margin: const EdgeInsets.only(left: 8.0,right: 4.0),
-            color: Colors.green,
+            color: Colors.blueAccent,
             child: ConstrainedBox(
               constraints: BoxConstraints.expand(),
               child: FlatButton(
                 onPressed: () {
 
 
-                  //funClick(2);
-                  //listaValores(2);
-                  funcVerifica(4);
-                  verificarJogada();
+                  inicia(4, 3);
                   print(jogadas);
 
                   print(lista[3]);
@@ -448,7 +511,7 @@ class _HomePageState extends State<HomePage> {
                 disabledTextColor: Colors.white,
                 highlightColor: Colors.orangeAccent,
                 child: Text(
-                  (click? '$data': ''),
+                  (lt2[3]==null? '' :'${lt2[3]}'),
                 ),
               ),
             ),
@@ -459,17 +522,15 @@ class _HomePageState extends State<HomePage> {
         Expanded(
           child: Container(
             margin: const EdgeInsets.only(left: 4.0, right: 4.0),
-            color: Colors.white,
+            color: Colors.blueAccent,
             child: ConstrainedBox(
               constraints: BoxConstraints.expand(),
               child: FlatButton(
                 onPressed: () {
 
 
-                  //funClick(2);
-                  //listaValores(2);
-                  funcVerifica(5);
-                  verificarJogada();
+                  inicia(5, 4);
+
                   print(jogadas);
 
                   print(lista[4]);
@@ -481,8 +542,9 @@ class _HomePageState extends State<HomePage> {
                 disabledTextColor: Colors.white,
                 highlightColor: Colors.orangeAccent,
                 child: Text(
-                  (click? '$data': ''),
+                  (lt2[4]==null? '' :'${lt2[4]}'),
                 ),
+
               ),
             ),
           ),
@@ -492,17 +554,15 @@ class _HomePageState extends State<HomePage> {
         Expanded(
           child: Container(
             margin: const EdgeInsets.only(left: 4.0,right: 8.0),
-            color: Colors.greenAccent,
+            color: Colors.blueAccent,
             child: ConstrainedBox(
               constraints: BoxConstraints.expand(),
               child: FlatButton(
                 onPressed: () {
 
 
-                  //funClick(2);
-                  //listaValores(2);
-                  funcVerifica(6);
-                  verificarJogada();
+                  inicia(6, 5);
+
                   print(jogadas);
 
                   print(lista[5]);
@@ -514,8 +574,9 @@ class _HomePageState extends State<HomePage> {
                 disabledTextColor: Colors.white,
                 highlightColor: Colors.orangeAccent,
                 child: Text(
-                  (click? '$data': ''),
+                  (lt2[5]==null? '' :'${lt2[5]}'),
                 ),
+
               ),
             ),
           ),
@@ -535,17 +596,14 @@ class _HomePageState extends State<HomePage> {
         Expanded(
           child: Container(
             margin: const EdgeInsets.only(left: 8.0,right: 4.0),
-            color: Colors.green,
+            color: Colors.blueAccent,
             child: ConstrainedBox(
               constraints: BoxConstraints.expand(),
               child: FlatButton(
                 onPressed: () {
 
+                  inicia(7, 6);
 
-                  //funClick(2);
-                  //listaValores(2);
-                  funcVerifica(7);
-                  verificarJogada();
                   print(jogadas);
 
                   print(lista[6]);
@@ -557,8 +615,9 @@ class _HomePageState extends State<HomePage> {
                 disabledTextColor: Colors.white,
                 highlightColor: Colors.orangeAccent,
                 child: Text(
-                  (click? '$data': ''),
+                  (lt2[6]==null? '' :'${lt2[6]}'),
                 ),
+
               ),
             ),
           ),
@@ -568,17 +627,15 @@ class _HomePageState extends State<HomePage> {
         Expanded(
           child: Container(
             margin: const EdgeInsets.only(left: 4.0, right: 4.0),
-            color: Colors.white,
+            color: Colors.blueAccent,
             child: ConstrainedBox(
               constraints: BoxConstraints.expand(),
               child: FlatButton(
                 onPressed: () {
 
 
-                  //funClick(2);
-                  //listaValores(2);
-                  funcVerifica(8);
-                  verificarJogada();
+                  inicia(8, 7);
+
                   print(jogadas);
 
                   print(lista[7]);
@@ -590,8 +647,9 @@ class _HomePageState extends State<HomePage> {
                 disabledTextColor: Colors.white,
                 highlightColor: Colors.orangeAccent,
                 child: Text(
-                  (click? '$data': ''),
+                  (lt2[7]==null? '' :'${lt2[7]}'),
                 ),
+
               ),
             ),
           ),
@@ -601,17 +659,14 @@ class _HomePageState extends State<HomePage> {
         Expanded(
           child: Container(
             margin: const EdgeInsets.only(left: 4.0,right: 8.0),
-            color: Colors.greenAccent,
+            color: Colors.blueAccent,
             child: ConstrainedBox(
               constraints: BoxConstraints.expand(),
               child: FlatButton(
                 onPressed: () {
 
 
-                  //funClick(2);
-                  //listaValores(2);
-                  funcVerifica(9);
-                  verificarJogada();
+                  inicia(9, 8);
                   print(jogadas);
 
                   print(lista[8]);
@@ -623,8 +678,9 @@ class _HomePageState extends State<HomePage> {
                 disabledTextColor: Colors.white,
                 highlightColor: Colors.orangeAccent,
                 child: Text(
-                  (click? '$data': ''),
+                  (lt2[8]==null? '' :'${lt2[8]}'),
                 ),
+
               ),
             ),
           ),
@@ -635,6 +691,4 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-
 }
-

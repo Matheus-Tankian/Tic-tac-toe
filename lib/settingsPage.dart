@@ -29,7 +29,7 @@ class _SettingsPageState extends State<SettingsPage> {
 //        children: <Widget>[
          body: Container(
             height: (auxHeight? (heightSize):100),
-            color: Colors.grey,
+           color: Colors.indigo,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
@@ -42,7 +42,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
                 Expanded(
                   child: Container(
-                    color: Colors.grey,
+
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: textPlay1View(),
                   ),
@@ -52,7 +52,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 Expanded(
 
                   child: Container(
-                    color: Colors.grey,
+
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: textPlay2View(),
                   ),
@@ -83,9 +83,9 @@ class _SettingsPageState extends State<SettingsPage> {
     return Container(
       child: Center(
         child: Text(
-          'Iforme os dados',
+          'Informe os dados',
           style: TextStyle(
-            fontSize: 30,
+            fontSize: 40,
             color: Colors.white,
           ),
         ),
@@ -95,9 +95,17 @@ class _SettingsPageState extends State<SettingsPage> {
 
   Widget textPlay1View(){
     return TextField(
+        cursorColor: Colors.white,
+        textInputAction: TextInputAction.send,
         decoration: InputDecoration(
-          border: OutlineInputBorder(),
+          fillColor: Colors.white,
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.white),
+          ),
           labelText: 'name play 1',
+          labelStyle: new TextStyle(
+              color: Colors.white,
+          ),
         ),
         onChanged: (text){
           var aux  = text;
@@ -112,9 +120,18 @@ class _SettingsPageState extends State<SettingsPage> {
 
   Widget textPlay2View(){
     return TextField(
+      cursorColor: Colors.white,
+        textInputAction: TextInputAction.send,
         decoration: InputDecoration(
-          border: OutlineInputBorder(),
+
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.white,),
+          ),
+
           labelText: 'name play 2',
+          labelStyle: new TextStyle(
+              color:Colors.white,
+          ),
         ),
         onChanged: (text){
           var aux  = text;
