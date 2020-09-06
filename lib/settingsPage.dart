@@ -1,7 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hash/homePage.dart';
 
 class SettingsPage extends StatefulWidget {
+
+
+
+
   @override
   _SettingsPageState createState() => _SettingsPageState();
 }
@@ -62,7 +67,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 Expanded(
 
                   child: Align(
-                    alignment: Alignment.center,
+                    alignment: Alignment.topCenter,
                     child: Container(
                       width: 200,
                       height: 80,
@@ -96,10 +101,14 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget textPlay1View(){
     return TextField(
         cursorColor: Colors.white,
+        style: TextStyle(color: Colors.white),
         textInputAction: TextInputAction.send,
         decoration: InputDecoration(
           fillColor: Colors.white,
-          focusedBorder: UnderlineInputBorder(
+          focusedBorder:OutlineInputBorder(
+            borderSide:  BorderSide(color: Colors.white),
+          ),
+          enabledBorder:OutlineInputBorder(
             borderSide: BorderSide(color: Colors.white),
           ),
           labelText: 'name play 1',
@@ -121,13 +130,16 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget textPlay2View(){
     return TextField(
       cursorColor: Colors.white,
+        style: TextStyle(color: Colors.white),
         textInputAction: TextInputAction.send,
-        decoration: InputDecoration(
-
-          focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.white,),
+        decoration:
+        InputDecoration(
+        focusedBorder:OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.white),
+        ),
+          enabledBorder:OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.white),
           ),
-
           labelText: 'name play 2',
           labelStyle: new TextStyle(
               color:Colors.white,
@@ -146,9 +158,11 @@ class _SettingsPageState extends State<SettingsPage> {
 
   Widget buttonView(){
     return FlatButton(
-
       onPressed: () {
-
+        Navigator.push(context,
+            MaterialPageRoute(
+              builder: (context) => HomePage(foo: namePlay1)
+            ));
       },
       textColor: Colors.white,
       color: Colors.blueAccent,

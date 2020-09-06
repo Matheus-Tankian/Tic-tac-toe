@@ -5,7 +5,10 @@ import 'settingsPage.dart';
 
 class HomePage extends StatefulWidget {
 
+  final String foo;
 
+  const HomePage({Key key, this.foo}): super(key: key);
+  
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -14,7 +17,6 @@ class _HomePageState extends State<HomePage> {
 
   var num = 0;
   bool auxheight = true;
-
   int jogadas = 0;
 
   String data;
@@ -26,17 +28,7 @@ class _HomePageState extends State<HomePage> {
 
   bool click = false;
 
-//  void apo(value){
-//    for(int i=0;i<9;i++){
-//      print(lts[i]);
-//      if(lts[1]==0){
-//        setState(() {
-//          lts[1]=value;
-//        });
-//      }
-//    }
-//
-//  }
+
 
   void inicia(funcval, verival){
     if(click==false){
@@ -223,9 +215,6 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-
-
-
   @override
 
   Widget build(BuildContext context) {
@@ -260,7 +249,7 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
         height: (auxheight? (heightSize): 300),
         color: Colors.indigo,
-        child: MainView(),
+        child: 
       ),
     );
   }
@@ -280,7 +269,7 @@ class _HomePageState extends State<HomePage> {
                         Expanded(
                           child:Center(
                             child: Text(
-                              'Play1',
+                              '',
                               style: TextStyle(
                                 fontSize: 20,
                                 color: Colors.white,
@@ -403,6 +392,7 @@ class _HomePageState extends State<HomePage> {
                   print(jogadas);
 
                   print(lista[0]);
+                  print(lt2);
 
                 },
                 textColor: Colors.white,
