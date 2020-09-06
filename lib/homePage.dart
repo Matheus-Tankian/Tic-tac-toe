@@ -5,9 +5,10 @@ import 'settingsPage.dart';
 
 class HomePage extends StatefulWidget {
 
-  final String foo;
+  final String nameP1;
+  final String nameP2;
 
-  const HomePage({Key key, this.foo}): super(key: key);
+  const HomePage({Key key, this.nameP1,this.nameP2 }): super(key: key);
   
   @override
   _HomePageState createState() => _HomePageState();
@@ -15,16 +16,18 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-  var num = 0;
+ // var num = 0;
   bool auxheight = true;
   int jogadas = 0;
 
-  String data;
-  String datao;
+  //String data;
+  //String datao;
 
  List<int> lista = new List(9);
 
  List<String>lt2 = new List(9);
+
+
 
   bool click = false;
 
@@ -66,12 +69,42 @@ class _HomePageState extends State<HomePage> {
       print('par');
       setState(() {
         lt2[value] = 'X';
+        resultFinal();
       });
     }else if(jogadas%2 == 1){
       print('Inpar');
       setState(() {
         lt2[value] = 'O';
+        resultFinal();
       });
+    }
+  }
+
+  void resultFinal(){
+    if((((lt2[0]=='X')&&(lt2[1]=='X')&&(lt2[2]=='X')) || ((lt2[2]=='X')&&(lt2[1]=='X')&&(lt2[0]=='X'))) ||
+        (((lt2[3]=='X')&&(lt2[4]=='X')&&(lt2[5]=='X')) || ((lt2[5]=='X')&&(lt2[4]=='X')&&(lt2[3]=='X'))) ||
+        (((lt2[6]=='X')&&(lt2[7]=='X')&&(lt2[8]=='X')) || ((lt2[8]=='X')&&(lt2[7]=='X')&&(lt2[6]=='X'))) ||
+        (((lt2[0]=='X')&&(lt2[3]=='X')&&(lt2[6]=='X')) || ((lt2[6]=='X')&&(lt2[3]=='X')&&(lt2[0]=='X'))) ||
+        (((lt2[1]=='X')&&(lt2[4]=='X')&&(lt2[7]=='X')) || ((lt2[7]=='X')&&(lt2[4]=='X')&&(lt2[1]=='X'))) ||
+        (((lt2[2]=='X')&&(lt2[5]=='X')&&(lt2[8]=='X')) || ((lt2[8]=='X')&&(lt2[5]=='X')&&(lt2[2]=='X'))) ||
+        (((lt2[0]=='X')&&(lt2[4]=='X')&&(lt2[8]=='X')) || ((lt2[8]=='X')&&(lt2[4]=='X')&&(lt2[0]=='X'))) ||
+        (((lt2[2]=='X')&&(lt2[4]=='X')&&(lt2[6]=='X')) || ((lt2[6]=='X')&&(lt2[4]=='X')&&(lt2[2]=='X')))){
+
+      print('X ganhou');
+
+    }else  if((((lt2[0]=='O')&&(lt2[1]=='O')&&(lt2[2]=='O')) || ((lt2[2]=='O')&&(lt2[1]=='O')&&(lt2[0]=='O'))) ||
+        (((lt2[3]=='O')&&(lt2[4]=='O')&&(lt2[5]=='O')) || ((lt2[5]=='O')&&(lt2[4]=='O')&&(lt2[3]=='O'))) ||
+        (((lt2[6]=='O')&&(lt2[7]=='O')&&(lt2[8]=='O')) || ((lt2[8]=='O')&&(lt2[7]=='O')&&(lt2[6]=='O'))) ||
+        (((lt2[0]=='O')&&(lt2[3]=='O')&&(lt2[6]=='O')) || ((lt2[6]=='O')&&(lt2[3]=='O')&&(lt2[0]=='O'))) ||
+        (((lt2[1]=='O')&&(lt2[4]=='O')&&(lt2[7]=='O')) || ((lt2[7]=='O')&&(lt2[4]=='O')&&(lt2[1]=='O'))) ||
+        (((lt2[2]=='O')&&(lt2[5]=='O')&&(lt2[8]=='O')) || ((lt2[8]=='O')&&(lt2[5]=='O')&&(lt2[2]=='O'))) ||
+        (((lt2[0]=='O')&&(lt2[4]=='O')&&(lt2[8]=='O')) || ((lt2[8]=='O')&&(lt2[4]=='O')&&(lt2[0]=='O'))) ||
+        (((lt2[2]=='O')&&(lt2[4]=='O')&&(lt2[6]=='O')) || ((lt2[6]=='O')&&(lt2[4]=='O')&&(lt2[2]=='O')))){
+
+      print('O ganhou');
+
+    }else{
+      print('IMpate');
     }
   }
 
@@ -249,7 +282,7 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
         height: (auxheight? (heightSize): 300),
         color: Colors.indigo,
-        child: 
+        child: MainView(),
       ),
     );
   }
@@ -269,7 +302,7 @@ class _HomePageState extends State<HomePage> {
                         Expanded(
                           child:Center(
                             child: Text(
-                              '',
+                              (this.widget.nameP1 == null?'Play 1': '${this.widget.nameP1}'),
                               style: TextStyle(
                                 fontSize: 20,
                                 color: Colors.white,
@@ -306,7 +339,7 @@ class _HomePageState extends State<HomePage> {
                         Expanded(
                           child:Center(
                             child: Text(
-                              'Play2 ',
+                              (this.widget.nameP2 == null?'Play 2': '${this.widget.nameP2}'),
                               style: TextStyle(
                                 fontSize: 20,
                                 color: Colors.white,

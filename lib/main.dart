@@ -9,7 +9,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  var x;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

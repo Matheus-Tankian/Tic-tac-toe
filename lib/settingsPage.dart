@@ -161,7 +161,7 @@ class _SettingsPageState extends State<SettingsPage> {
       onPressed: () {
         Navigator.push(context,
             MaterialPageRoute(
-              builder: (context) => HomePage(foo: namePlay1)
+              builder: (BuildContext context) => HomePage(nameP1: namePlay1, nameP2: namePlay2,)
             ));
       },
       textColor: Colors.white,
