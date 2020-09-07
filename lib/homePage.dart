@@ -18,7 +18,12 @@ class _HomePageState extends State<HomePage> {
 
  // var num = 0;
   bool auxheight = true;
+  bool xwin = false;
+  bool owin = false;
+  bool empate = false;
+  bool click = false;
   int jogadas = 0;
+
 
   //String data;
   //String datao;
@@ -29,7 +34,7 @@ class _HomePageState extends State<HomePage> {
 
 
 
-  bool click = false;
+
 
 
 
@@ -59,9 +64,17 @@ class _HomePageState extends State<HomePage> {
 
 
   void primeiro(){
-    setState(() {
-      jogadas = jogadas + 1;
-    });
+    if(((jogadas == 8) && (owin == false))||((jogadas == 8) && (xwin == false))){
+      setState(() {
+        empate = !empate;
+      });
+      resultFinal();
+    }else{
+      setState(() {
+        jogadas = jogadas + 1;
+      });
+      resultFinal();
+    }
   }
 
   void verificarJogada(value){
@@ -69,15 +82,16 @@ class _HomePageState extends State<HomePage> {
       print('par');
       setState(() {
         lt2[value] = 'X';
-        resultFinal();
       });
+      //resultFinal();
     }else if(jogadas%2 == 1){
       print('Inpar');
       setState(() {
         lt2[value] = 'O';
-        resultFinal();
       });
+      //resultFinal();
     }
+    //resultFinal();
   }
 
   void resultFinal(){
@@ -89,8 +103,11 @@ class _HomePageState extends State<HomePage> {
         (((lt2[2]=='X')&&(lt2[5]=='X')&&(lt2[8]=='X')) || ((lt2[8]=='X')&&(lt2[5]=='X')&&(lt2[2]=='X'))) ||
         (((lt2[0]=='X')&&(lt2[4]=='X')&&(lt2[8]=='X')) || ((lt2[8]=='X')&&(lt2[4]=='X')&&(lt2[0]=='X'))) ||
         (((lt2[2]=='X')&&(lt2[4]=='X')&&(lt2[6]=='X')) || ((lt2[6]=='X')&&(lt2[4]=='X')&&(lt2[2]=='X')))){
-
+        setState(() {
+          xwin = true;
+        });
       print('X ganhou');
+      showAlertDialogXwin(context);
 
     }else  if((((lt2[0]=='O')&&(lt2[1]=='O')&&(lt2[2]=='O')) || ((lt2[2]=='O')&&(lt2[1]=='O')&&(lt2[0]=='O'))) ||
         (((lt2[3]=='O')&&(lt2[4]=='O')&&(lt2[5]=='O')) || ((lt2[5]=='O')&&(lt2[4]=='O')&&(lt2[3]=='O'))) ||
@@ -101,12 +118,142 @@ class _HomePageState extends State<HomePage> {
         (((lt2[0]=='O')&&(lt2[4]=='O')&&(lt2[8]=='O')) || ((lt2[8]=='O')&&(lt2[4]=='O')&&(lt2[0]=='O'))) ||
         (((lt2[2]=='O')&&(lt2[4]=='O')&&(lt2[6]=='O')) || ((lt2[6]=='O')&&(lt2[4]=='O')&&(lt2[2]=='O')))){
 
+      setState(() {
+        owin = true;
+      });
       print('O ganhou');
+      showAlertDialogOwin(context);
 
     }else{
-      print('IMpate');
+      if((empate == true) && (owin == false) ||
+          (empate == true) && (xwin == false)){
+        showAlertDialogAtie(context);
+      }
     }
   }
+
+  showAlertDialogXwin(BuildContext context) {
+
+    Widget continuaButton = FlatButton(
+      child: Text("Continue"),
+      onPressed:  () {
+        Navigator.of(context).pop();
+        for(int i=0;i<9;i++){
+         setState(() {
+           lista[i] = null;
+           lt2[i] = null;
+         });
+        }
+        setState(() {
+          jogadas = 0;
+          empate =false;
+          xwin = false;
+          owin = false;
+        });
+      },
+    );
+
+    AlertDialog alert = AlertDialog(
+      title: Text("Congratulations you won"),
+      content: Text((this.widget.nameP1!=null? '${this.widget.nameP1} X': 'Play1 X'),
+        style: TextStyle(
+          fontSize: 30,
+      ),
+        textAlign: TextAlign.center,
+      ),
+      actions: [
+        continuaButton,
+      ],
+    );
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
+  showAlertDialogOwin(BuildContext context) {
+
+    Widget continuaButton = FlatButton(
+      child: Text("Continue"),
+      onPressed:  () {
+        Navigator.of(context).pop();
+        for(int i=0;i<9;i++){
+          setState(() {
+            lista[i] = null;
+            lt2[i] = null;
+          });
+        }
+        setState(() {
+          jogadas = 0;
+          empate =false;
+          xwin = false;
+          owin = false;
+        });
+      },
+    );
+
+    AlertDialog alert = AlertDialog(
+      title: Text("Congratulations you won"),
+      content: Text((this.widget.nameP2!=null? '${this.widget.nameP2} O': 'Play2 O'),
+        style: TextStyle(
+            fontSize: 20,
+        ),
+        textAlign: TextAlign.center,
+      ),
+      actions: [
+        continuaButton,
+      ],
+    );
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
+  showAlertDialogAtie(BuildContext context) {
+
+    Widget continuaButton = FlatButton(
+      child: Text("Continue"),
+      onPressed:  () {
+        Navigator.of(context).pop();
+        for(int i=0;i<9;i++){
+          setState(() {
+            lista[i] = null;
+            lt2[i] = null;
+          });
+        }
+        setState(() {
+          jogadas = 0;
+          empate =false;
+          xwin = false;
+          owin = false;
+        });
+      },
+    );
+
+    AlertDialog alert = AlertDialog(
+      title: Text("Nobody won"),
+      content: Icon(Icons.insert_emoticon,size: 60),
+      actions: [
+        continuaButton,
+      ],
+    );
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
+
 
   void funcVerifica(value, verival){
     if(value == 1){
@@ -422,10 +569,12 @@ class _HomePageState extends State<HomePage> {
 
                   inicia(1, 0);
 
-                  print(jogadas);
+                  //print(jogadas);
 
-                  print(lista[0]);
-                  print(lt2);
+                  //print(lista[0]);
+                 // print(lt2);
+
+                 // print(empate);
 
                 },
                 textColor: Colors.white,
@@ -434,7 +583,10 @@ class _HomePageState extends State<HomePage> {
                 disabledTextColor: Colors.white,
                 highlightColor: Colors.orangeAccent,
                 child: Text(
-                  (lt2[0]==null? '' :'${lt2[0]}'),
+                  (lt2[0]==null ? '' :'${lt2[0]}'),
+                  style: TextStyle(
+                    fontSize: 40,
+                  ),
                 ),
               ),
             ),
@@ -452,9 +604,6 @@ class _HomePageState extends State<HomePage> {
                 onPressed: () {
 
                   inicia(2, 1);
-                 print(jogadas);
-
-                  print(lista[1]);
 
                 },
                 textColor: Colors.white,
@@ -464,6 +613,9 @@ class _HomePageState extends State<HomePage> {
                 highlightColor: Colors.orangeAccent,
                 child: Text(
                   (lt2[1]==null? '' :'${lt2[1]}'),
+                  style: TextStyle(
+                    fontSize: 40,
+                  ),
                 ),
 
               ),
@@ -482,10 +634,6 @@ class _HomePageState extends State<HomePage> {
                 onPressed: () {
 
                   inicia(3, 2);
-                  print(jogadas);
-
-                  print(lista[2]);
-
 
                 },
                 textColor: Colors.white,
@@ -495,6 +643,9 @@ class _HomePageState extends State<HomePage> {
                 highlightColor: Colors.orangeAccent,
                 child: Text(
                   (lt2[2]==null? '' :'${lt2[2]}'),
+                  style: TextStyle(
+                    fontSize: 40,
+                  ),
                 ),
               ),
             ),
@@ -523,9 +674,7 @@ class _HomePageState extends State<HomePage> {
 
 
                   inicia(4, 3);
-                  print(jogadas);
 
-                  print(lista[3]);
 
                 },
                 textColor: Colors.white,
@@ -535,6 +684,9 @@ class _HomePageState extends State<HomePage> {
                 highlightColor: Colors.orangeAccent,
                 child: Text(
                   (lt2[3]==null? '' :'${lt2[3]}'),
+                  style: TextStyle(
+                    fontSize: 40,
+                  ),
                 ),
               ),
             ),
@@ -554,9 +706,6 @@ class _HomePageState extends State<HomePage> {
 
                   inicia(5, 4);
 
-                  print(jogadas);
-
-                  print(lista[4]);
 
                 },
                 textColor: Colors.white,
@@ -566,6 +715,9 @@ class _HomePageState extends State<HomePage> {
                 highlightColor: Colors.orangeAccent,
                 child: Text(
                   (lt2[4]==null? '' :'${lt2[4]}'),
+                  style: TextStyle(
+                    fontSize: 40,
+                  ),
                 ),
 
               ),
@@ -586,9 +738,6 @@ class _HomePageState extends State<HomePage> {
 
                   inicia(6, 5);
 
-                  print(jogadas);
-
-                  print(lista[5]);
 
                 },
                 textColor: Colors.white,
@@ -598,6 +747,9 @@ class _HomePageState extends State<HomePage> {
                 highlightColor: Colors.orangeAccent,
                 child: Text(
                   (lt2[5]==null? '' :'${lt2[5]}'),
+                  style: TextStyle(
+                    fontSize: 40,
+                  ),
                 ),
 
               ),
@@ -627,9 +779,6 @@ class _HomePageState extends State<HomePage> {
 
                   inicia(7, 6);
 
-                  print(jogadas);
-
-                  print(lista[6]);
 
                 },
                 textColor: Colors.white,
@@ -639,6 +788,9 @@ class _HomePageState extends State<HomePage> {
                 highlightColor: Colors.orangeAccent,
                 child: Text(
                   (lt2[6]==null? '' :'${lt2[6]}'),
+                  style: TextStyle(
+                    fontSize: 40,
+                  ),
                 ),
 
               ),
@@ -659,10 +811,6 @@ class _HomePageState extends State<HomePage> {
 
                   inicia(8, 7);
 
-                  print(jogadas);
-
-                  print(lista[7]);
-
                 },
                 textColor: Colors.white,
                 color: Colors.blueAccent,
@@ -671,6 +819,9 @@ class _HomePageState extends State<HomePage> {
                 highlightColor: Colors.orangeAccent,
                 child: Text(
                   (lt2[7]==null? '' :'${lt2[7]}'),
+                  style: TextStyle(
+                    fontSize: 40,
+                  ),
                 ),
 
               ),
@@ -688,11 +839,7 @@ class _HomePageState extends State<HomePage> {
               child: FlatButton(
                 onPressed: () {
 
-
                   inicia(9, 8);
-                  print(jogadas);
-
-                  print(lista[8]);
 
                 },
                 textColor: Colors.white,
@@ -702,6 +849,9 @@ class _HomePageState extends State<HomePage> {
                 highlightColor: Colors.orangeAccent,
                 child: Text(
                   (lt2[8]==null? '' :'${lt2[8]}'),
+                  style: TextStyle(
+                    fontSize: 40,
+                  ),
                 ),
 
               ),
