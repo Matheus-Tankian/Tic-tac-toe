@@ -159,7 +159,7 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget buttonView(){
     return FlatButton(
       onPressed: () {
-        Navigator.push(context,
+        Navigator.pop(context,
             MaterialPageRoute(
               builder: (BuildContext context) => HomePage(nameP1: namePlay1, nameP2: namePlay2,)
             ));
