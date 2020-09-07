@@ -1,6 +1,12 @@
-# hash
+# Tic tac toe
+tic tac toe game
 
-hash  game
+![homePgae]()
+![settings]()
+![start]()
+![x won]()
+![o won]()
+![a tie]()
 
 ## Getting Started
 
