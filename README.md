@@ -1,12 +1,12 @@
 # Tic tac toe
 tic tac toe game
 
-![homePgae]()
-![settings]()
-![start]()
-![x won]()
-![o won]()
-![a tie]()
+![homePgae](https://github.com/Matheus-Tankian/Tic-tac-toe/blob/master/Screenshot_20200907-155726.jpg)
+![settings](https://github.com/Matheus-Tankian/Tic-tac-toe/blob/master/Screenshot_20200907-155739.jpg)
+![start](https://github.com/Matheus-Tankian/Tic-tac-toe/blob/master/Screenshot_20200907-155750.jpg)
+![x won](https://github.com/Matheus-Tankian/Tic-tac-toe/blob/master/Screenshot_20200907-155759.jpg)
+![o won](https://github.com/Matheus-Tankian/Tic-tac-toe/blob/master/Screenshot_20200907-155816.jpg)
+![a tie](https://github.com/Matheus-Tankian/Tic-tac-toe/blob/master/Screenshot_20200907-155808.jpg)
 
 ## Getting Started
 
